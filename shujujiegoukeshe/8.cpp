@@ -2,10 +2,9 @@
 #include <vector>
 #include <fstream>
 #include <cmath>
-#define order 4  // B树的阶数
+#define order 4  // 阶数
 using namespace std;
-// 在 Node 结构体后，其他函数声明之前添加：
-struct Node;  // 前向声明
+struct Node; 
 void remove(Node*& root, int key);
 void remove(Node*& root, Node* node, int key);
 void rebalance(Node*& root, Node* node);
@@ -126,8 +125,6 @@ void insert(Node*& root, int x) {
     while (i < node->data.size() && node->data[i] < x) {
         i++;
     }
-    
-    // 避免重复插入
     if (i < node->data.size() && node->data[i] == x) {
         return;
     }
@@ -300,7 +297,6 @@ void deleteFromInternal(Node*& root, Node* node, int key) {
     }
     
     if (index < node->data.size() && node->data[index] == key) {
-        // 找到前驱或后继来替换
         if (node->next[index]->data.size() >= (order + 1) / 2) {
             // 使用前驱
             int pred = findMax(node->next[index]);
