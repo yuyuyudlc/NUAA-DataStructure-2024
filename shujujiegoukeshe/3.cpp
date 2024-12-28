@@ -833,7 +833,7 @@ void display_menu() {
     cout << "请选择功能 (0-10): ";
 }
 
-// --- Main Function ---
+
 int main() {
     GenealogyManager manager;
     while (true) {

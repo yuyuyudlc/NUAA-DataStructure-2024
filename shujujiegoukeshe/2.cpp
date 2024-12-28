@@ -41,7 +41,6 @@ struct MyStack {
         if (!empty()) {
             Node* temp = topNode;
             topNode = topNode->next;
-           // delete temp;
         }
     }
 
@@ -73,7 +72,8 @@ void f() {
         bool found = false;
 
         for (; col <= n; col++) {
-            if (d[col] == 0 && ud[col + step - 1] == 0 && b[col - step + n - 1] == 0) {
+            if (d[col] == 0 && ud[col + step - 1] == 0 && b[col - step + n - 1] == 0) 
+            {
                 d[col] = 1;
                 ud[col + step - 1] = 1;
                 b[col - step + n - 1] = 1;
@@ -85,7 +85,8 @@ void f() {
             }
         }
 
-        if (!found) {
+        if (!found) 
+        {
             if (st.empty()) break;
             MyPair<int, int> last = st.top();
             st.pop();
@@ -95,15 +96,20 @@ void f() {
             ud[col + step - 1] = 0;
             b[col - step + n - 1] = 0;
             col++;
-        } else if (step == n + 1) {
-            if (ans < 100) {
+        } 
+        else if (step == n + 1) 
+        {
+            if (ans < 100) 
+            {
                 MyStack<MyPair<int, int>> temp = st;
                 int s[20] = {0};
-                while (!temp.empty()) {
+                while (!temp.empty()) 
+                {
                     s[temp.top().first] = temp.top().second;
                     temp.pop();
                 }
-                for (int i = 1; i <= n; i++) {
+                for (int i = 1; i <= n; i++) 
+                {
                     cout << s[i] << " ";
                 }
                 cout << endl;
@@ -122,7 +128,8 @@ void f() {
     cout << ans;
 }
 
-int main() {
+int main() 
+{
     f();
     return 0;
 }

@@ -144,7 +144,8 @@ Node* deleteNode(Node* root, int value) {
 }
 
 // 查询节点
-bool search(Node* root, int value) {
+bool search(Node* root, int value) 
+{
     if (root == nullptr) return false;
     if (value == root->data) return true;
     if (value < root->data) return search(root->left, value);
@@ -152,26 +153,51 @@ bool search(Node* root, int value) {
 }
 
 // 生成质数
-vector<int> generatePrimes(int limit) {
-    vector<int> primes;
-    vector<bool> sieve(limit + 1, true);
-    sieve[0] = sieve[1] = false;
 
-    for (int i = 2; i <= limit; i++) {
-        if (sieve[i]) {
-            primes.push_back(i);
-            for (int j = i * i; j <= limit; j += i) {
-                sieve[j] = false;
+// 写入查询结果到文件
+vector<int> Eratosthenes(int m) {
+    vector<bool> isPrime(m + 1, true);
+    isPrime[0] = isPrime[1] = false; 
+    for (int i = 2; i * i <= m; ++i) 
+    {
+        if (isPrime[i]) {
+            for (int j = i * i; j <= m; j += i) {
+                isPrime[j] = false;
             }
         }
     }
+
+    vector<int> primes;
+    for (int i = 2; i <= m; ++i) 
+    {
+        if (isPrime[i]) {
+            primes.push_back(i);
+        }
+    }
+
     return primes;
 }
 
-// 写入查询结果到文件
-void writeQueryResults(const vector<int>& queries, Node* root, const string& filename) {
+// 从 n 到 m 生成质数并返回
+vector<int> generatePrimes(int n, int m) 
+{
+    vector<int> primes = Eratosthenes(m);
+    // 筛选出 [n, m] 范围内的质数
+    vector<int> result;
+    for (int prime : primes) 
+    {
+        if (prime >= n) 
+        {
+            result.push_back(prime);
+        }
+    }
+    return result;
+}
+void writeQueryResults(const vector<int>& queries, Node* root, const string& filename) 
+{
     ofstream outfile(filename);
-    for (int query : queries) {
+    for (int query : queries) 
+    {
         outfile << query << " " << (search(root, query) ? "yes" : "no") << endl;
     }
     outfile.close();
@@ -179,39 +205,45 @@ void writeQueryResults(const vector<int>& queries, Node* root, const string& fil
 
 int main() {
     // 生成质数
-    vector<int> primes = generatePrimes(10000);
+    vector<int> primes = generatePrimes(0,10000);
 
     // 创建平衡二叉排序树并插入1-10000之间的质数
     Node* root = nullptr;
-    for (int prime : primes) {
+    for (int prime : primes) 
+    {
         insert(root, prime);
     }
 
     // (1) 查询200-300之间的质数
-    vector<int> query1 = {200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255, 256, 257, 258, 259, 260, 261, 262, 263, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275, 276, 277, 278, 279, 280, 281, 282, 283, 284, 285, 286, 287, 288, 289, 290, 291, 292, 293, 294, 295, 296, 297, 298, 299};
+    vector<int> query1 =generatePrimes(200,300);
     writeQueryResults(query1, root, "tree1.txt");
 
     // (2) 删除500-2000之间的质数并查询600-700之间的质数
     vector<int> deletePrimes;
-    for (int prime : primes) {
-        if (prime >= 500 && prime <= 2000) {
+    for (int prime : primes) 
+    {
+        if (prime >= 500 && prime <= 2000) 
+        {
             deletePrimes.push_back(prime);
         }
     }
-    for (int prime : deletePrimes) {
+    for (int prime : deletePrimes) 
+    {
         root = deleteNode(root, prime);
     }
 
-    vector<int> query2 = {600, 601, 602, 603, 604, 605, 606, 607, 608, 609, 610, 611, 612, 613, 614, 615, 616, 617, 618, 619, 620, 621, 622, 623, 624, 625, 626, 627, 628, 629, 630, 631, 632, 633, 634, 635, 636, 637, 638, 639, 640, 641, 642, 643, 644, 645, 646, 647, 648, 649, 650, 651, 652, 653, 654, 655, 656, 657, 658, 659, 660, 661, 662, 663, 664, 665, 666, 667, 668, 669, 670, 671, 672, 673, 674, 675, 676, 677, 678, 679, 680, 681, 682, 683, 684, 685, 686, 687, 688, 689, 690, 691, 692, 693, 694, 695, 696, 697, 698, 699, 700};
+    vector<int> query2 = generatePrimes(600,700);
     writeQueryResults(query2, root, "tree2.txt");
 
     // (3) 插入1-1000之间的偶数并查询100-200之间的偶数
-    for (int i = 2; i <= 1000; i += 2) {
+    for (int i = 2; i <= 1000; i += 2) 
+    {
         insert(root, i);
     }
 
     vector<int> query3;
-    for (int i = 100; i <= 200; i += 2) {
+    for (int i = 100; i <= 200; i += 2) 
+    {
         query3.push_back(i);
     }
     writeQueryResults(query3, root, "tree3.txt");

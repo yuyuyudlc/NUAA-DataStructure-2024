@@ -6,8 +6,10 @@ using namespace std;
 #define N 100
 int h[N], e[N], ne[N], w[N], idx;
 int n, m;
-bool visited[N];  // 记录节点是否被访问过
-int minTime = INT_MAX;  // 用来记录最小的最大施工时间
+bool visited[N]; 
+ // 记录节点是否被访问过
+int minTime = INT_MAX;  
+// 用来记录最小的最大施工时间
 void add(int a, int b, int c) {
     e[idx] = b;
     w[idx] = c;

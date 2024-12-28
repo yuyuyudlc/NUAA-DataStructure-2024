@@ -230,17 +230,6 @@ bool findMinStopsPath(int startId, int endId, const unordered_map<int, Station>&
     return false;
 }
 
-// 示例：添加一个新函数来打印所有站点信息
-void printStations(const unordered_map<int, Station>& stations) {
-    for (const auto& [id, station] : stations) {
-        cout << "站点ID: " << id << ", 所属线路: ";
-        for (const auto& line : station.lines) {
-            cout << line << " ";
-        }
-        cout << "\n";
-    }
-}
-
 int main() {
     // 创建一个存储所有站点的映射
     unordered_map<int, Station> stations;
@@ -250,9 +239,6 @@ int main() {
     if (!readBusData(filename, stations)) {
         return 1;  // 如果读取失败，退出程序
     }
-
-    // 添加打印站点信息的功能
-    printStations(stations);
 
     // 用户交互
     while (true) {
