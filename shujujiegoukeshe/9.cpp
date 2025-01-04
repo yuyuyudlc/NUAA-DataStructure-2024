@@ -7,7 +7,7 @@
 #include <string>
 #include <chrono>  // 需要添加头文件以使用时间测量
 using namespace std;
-
+int a[10000010];
 void insert(vector<int> &p) {
     for (int i = 1; i < p.size(); i++) {
         int temp = p[i];
@@ -243,6 +243,15 @@ void generateR(vector<int> &p,string file){
 }
 int main() {
     vector<int> p;
+    generateR(p,"data0.txt");
+    for(int i:p){
+        a[i]++;
+    }
+    for(int i=0;i<100000;i++){
+        if(a[i]!=0){
+            cout<<i<<":"<<a[i]<<endl;
+        }
+    }
     for (char i = '0'; i <= '9'; i++) {
         string file = "data" + string(1, i) + ".txt";
         cout << "Testing " << file << endl;

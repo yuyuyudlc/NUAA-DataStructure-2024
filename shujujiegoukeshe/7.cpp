@@ -235,7 +235,7 @@ int main() {
     unordered_map<int, Station> stations;
 
     // 调用函数读取数据文件
-    string filename = "road_test.txt";
+    string filename = "road.txt";
     if (!readBusData(filename, stations)) {
         return 1;  // 如果读取失败，退出程序
     }
@@ -246,7 +246,7 @@ int main() {
         cout << "1. 输入任意两站点，给出转车次数最少的乘车路线。\n";
         cout << "2. 输入任意两站点，给出经过站点最少的乘车路线。\n";
         cout << "3. 退出。\n";
-        cout << "请输入选项(1/2/3): ";
+        cout << "请输入选项(1/2/3): "; 
         int choice;
         cin >> choice;
 

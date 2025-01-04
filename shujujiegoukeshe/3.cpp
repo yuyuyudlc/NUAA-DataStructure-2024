@@ -29,7 +29,7 @@ public:
     string to_string_line() const {
         string line = to_string(id) + "|" + name + "|" + birth_date + "|" + marital_status + "|" + address + "|" + 
                       (is_alive ? "1" : "0") + "|" + death_date + "|" + to_string(parent_id) + "|";
-        for (size_t i = 0; i < children_ids.size(); ++i) {
+        for (auto i = 0; i < children_ids.size(); ++i) {
             line += to_string(children_ids[i]);
             if (i != children_ids.size() - 1)
                 line += ";";
@@ -107,7 +107,7 @@ public:
     }
 };
 
-// --- GenealogyManager Class ---
+//家谱类
 class GenealogyManager {
 private:
     unordered_map<int, Member> members_map; // key: id, value: Member

@@ -182,7 +182,7 @@ vector<int> Eratosthenes(int m) {
 vector<int> generatePrimes(int n, int m) 
 {
     vector<int> primes = Eratosthenes(m);
-    // 筛选出 [n, m] 范围内的质数
+    // 筛选出 n, m 范围内的质数
     vector<int> result;
     for (int prime : primes) 
     {
