@@ -5,7 +5,7 @@
 #include<fstream>
 #include <cstdlib>
 #include <string>
-#include <chrono>  // 需要添加头文件以使用时间测量
+#include <chrono>  
 using namespace std;
 int a[10000010];
 void insert(vector<int> &p) {
@@ -73,7 +73,7 @@ void selectsort(vector<int> &p) {
 }
 
 void heapSort(vector<int>& arr) {
-    priority_queue<int, vector<int>, greater<int>> pq;  // 使用最小堆
+    priority_queue<int, vector<int>, greater<int>> pq;  // 使用优先队列最小堆
     for (int num : arr) {
         pq.push(num);
     }
